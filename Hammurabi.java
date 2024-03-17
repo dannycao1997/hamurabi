@@ -1,21 +1,7 @@
 package hammurabi;               // package declaration
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Random;         // imports go here
 import java.util.Scanner;
-
-/* USING AS EXAMPLE
-O great Hammurabi!
-You are in year 1 of your ten-year rule.
-In the previous year 0 people starved to death.
-In the previous year 5 people entered the kingdom.
-The population is now 100.
-We harvested 3000 bushels at 3 bushels per acre.
-Rats destroyed 200 bushels, leaving 2800 bushels in storage.
-The city owns 1000 acres of land.
-Land is currently worth 19 bushels per acre.
-*/
-
 
 public class Hammurabi {
     Random rand = new Random();  // instance field variables
@@ -30,9 +16,21 @@ public class Hammurabi {
     }
 
     void playGame() {
-        // need a SOUT string statement here >>>>> System.out.println("WELCOME TO DANNY'S GAME")
-        // ROUGH DRAFT BACKBONE
-        //start game prompt: creating game loop for each of the 10 years
+
+
+        System.out.println(" ██░ ██  ▄▄▄       ███▄ ▄███▓ ███▄ ▄███▓ █    ██  ██▀███   ▄▄▄       ▄▄▄▄    ██▓\n" +
+                "▓██░ ██▒▒████▄    ▓██▒▀█▀ ██▒▓██▒▀█▀ ██▒ ██  ▓██▒▓██ ▒ ██▒▒████▄    ▓█████▄ ▓██▒\n" +
+                "▒██▀▀██░▒██  ▀█▄  ▓██    ▓██░▓██    ▓██░▓██  ▒██░▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒ ▄██▒██▒\n" +
+                "░▓█ ░██ ░██▄▄▄▄██ ▒██    ▒██ ▒██    ▒██ ▓▓█  ░██░▒██▀▀█▄  ░██▄▄▄▄██ ▒██░█▀  ░██░\n" +
+                "░▓█▒░██▓ ▓█   ▓██▒▒██▒   ░██▒▒██▒   ░██▒▒▒█████▓ ░██▓ ▒██▒ ▓█   ▓██▒░▓█  ▀█▓░██░\n" +
+                " ▒ ░░▒░▒ ▒▒   ▓▒█░░ ▒░   ░  ░░ ▒░   ░  ░░▒▓▒ ▒ ▒ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░▒▓███▀▒░▓  \n" +
+                " ▒ ░▒░ ░  ▒   ▒▒ ░░  ░      ░░  ░      ░░░▒░ ░ ░   ░▒ ░ ▒░  ▒   ▒▒ ░▒░▒   ░  ▒ ░\n" +
+                " ░  ░░ ░  ░   ▒   ░      ░   ░      ░    ░░░ ░ ░   ░░   ░   ░   ▒    ░    ░  ▒ ░\n" +
+                " ░  ░  ░      ░  ░       ░          ░      ░        ░           ░  ░ ░       ░  \n" +
+                "                                                                          ░     ");
+
+
+
         for (int year = 1; year <= 10; year++) {
             printSummary(year);
             int acresToBuy = askHowManyAcresToBuy(landValue, grainInStorage);
@@ -105,7 +103,7 @@ public class Hammurabi {
         }
         return grainToFeed;
     }
-    
+
     int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
         int acresToPlant = getNumber("How many acres will you plant with seed? ");
         while(acresToPlant > acresOwned || acresToPlant / 2 > bushels || acresToPlant > population * 10) {
@@ -121,7 +119,7 @@ public class Hammurabi {
         return acresToPlant;
     }
 
-
+    // get response
     int getNumber(String message) {
         while (true) {
             System.out.print(message);
@@ -135,21 +133,18 @@ public class Hammurabi {
     }
 
 
-    void printSummary( int year){
-        System.out.println("0 great Hammurabi!");
+    void printSummary(int year){
+        System.out.println("0 Great Hammurabi!");
         System.out.println("You are in year " + year + " of your ten year rule.");
         System.out.println("The population is now " + population + ".");
-        System.out.println("We harvested " + 'z' + " bushels at " + 'w' + " bushels per acre.");
-        // placeholder z for total and w for bushels per acre , need to come back and finish code
-        System.out.println("Rats destroyed " + 'r' + " bushels, leaving " + grainInStorage + " bushels in the stoarge.");
-        // placeholder r for grain eaten by rats, need to come back and finish code
+        System.out.println("Rats destroyed bushels, leaving " + grainInStorage + " bushels in the storage.");
         System.out.println("The city owns " + acresOwned + " acres of land.");
         System.out.println("Land is currently worth " + landValue + " bushels per acre.");
     }
 
 
     void finalSummary() {
-        System.out.println("You've completed your 10 year term!!!");
+        System.out.println("GREAT JOB! You've completed your 10 year term!!");
         System.out.println("Population: " + population);
         System.out.println("Acres owned: " + acresOwned);
         System.out.println("Bushels in storage: " + grainInStorage);
@@ -157,24 +152,42 @@ public class Hammurabi {
     }
 
 
+    // code to calculate yearly outcomes
     int plagueDeaths(int population) {
+        return rand.nextInt(100) < 15 ? population / 2 : 0;
     }
 
-    int starvationDeaths(int population, int bushelsFedToPeople) {
+    int starvationDeaths(int population, int grainFedToPeople) {
+        int peopleFed = grainFedToPeople / 20;
+        return population > peopleFed ? population - peopleFed : 0;
     }
 
     boolean uprising(int population, int howManyPeopleStarved) {
+        return howManyPeopleStarved > (population * 0.45);
     }
 
     int immigrants(int population, int acresOwned, int grainInStorage) {
+        if (population > 0){
+            return (20 * acresOwned + grainInStorage) / (100 * population) + 1;
+        }
+        return 0;
     }
 
-    int harvest(int acres, int bushelsUsedAsSeed) {
+    int harvest(int acresPlanted) {
+        int yield = rand.nextInt(6) + 1; //  yields 1-6 bushels harvest per acre
+        return acresPlanted * yield;
     }
 
-    int grainEatenByRats(int bushels) {
+    int grainEatenByRats(int grainInStorage) {
+        if (rand.nextInt(100) > 40) { // 40 % chance
+            int percent = rand.nextInt(21 ) + 10; // 10 - 30 % chance
+            return grainInStorage * percent / 100;
+        }
+        return 0;
     }
 
     int newCostOfLand() {
-    }
+        return rand.nextInt(7) + 17;
+    }   // random value: 17-23 bushels per acre
+
 }
