@@ -30,9 +30,9 @@ public class Hammurabi {
     }
 
     void playGame() {
-        // need a SOUT string statement here >>>>>
-        // ROUGH DRAFT BACK BONE
-        //starting game prompt: creating game loop for each of the 10 years
+        // need a SOUT string statement here >>>>> System.out.println("WELCOME TO DANNY'S GAME")
+        // ROUGH DRAFT BACKBONE
+        //start game prompt: creating game loop for each of the 10 years
         for (int year = 1; year <= 10; year++) {
             printSummary(year);
             int acresToBuy = askHowManyAcresToBuy(landValue, grainInStorage);
@@ -43,15 +43,13 @@ public class Hammurabi {
                 int acresToSell = askHowManyAcresToSell(acresOwned);
                 acresOwned -= acresToSell;
             }
-
             int grainToFeed = askHowMuchGrainToFeedPeople(grainInStorage);
             grainInStorage -= grainToFeed;
 
             int acresToPlant = askHowManyAcresToPlant(acresOwned, population, grainInStorage);
-            grainInStorage -= acresToPlant * 2; // 2 buhles per acre to plant
+            grainInStorage -= acresToPlant * 2; // = 2 bushels per acre to plant
 
-
-            // following year
+            // yearly outcomes
             int plagueDeaths = plagueDeaths(population);
             population -= plagueDeaths;
 
@@ -91,9 +89,21 @@ public class Hammurabi {
     }
 
     int askHowManyAcresToSell(int acresOwned) {
+        int acresToSell = getNumber("How many acres will you sell? ");
+        while (acresToSell > acresOwned) {
+            System.out.println("O great Hammurabi, we cannot sell more than we own!");
+            acresToSell = getNumber("How many acres will you sell? ");
+        }
+        return acresToSell;
     }
 
     int askHowMuchGrainToFeedPeople(int bushels) {
+        int grainToFeed = getNumber("How many bushels of grain will you feed the people? ");
+        while (grainToFeed > bushels) {
+            System.out.println("O great Hammurabi, we have only " + bushels + " bushels of grain!");
+            grainToFeed = getNumber("How many bushels of grain will you feed the people? ");
+        }
+        return grainToFeed;
     }
 
     int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
@@ -130,7 +140,7 @@ public class Hammurabi {
             }
         }
 
-        void printSummary ( int year){
+        void printSummary( int year){
             System.out.println("0 great Hammurabi!");
             System.out.println("You are in year " + year + " of your ten year rule.");
             System.out.println("In the previous year " + year + " people starved to death.");
