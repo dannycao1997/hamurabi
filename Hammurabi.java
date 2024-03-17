@@ -16,7 +16,7 @@ public class Hammurabi {
     }
 
     void playGame() {
-        System.out.println("Welcome to the Hammurabi Game!");
+        System.out.println("Welcome to Danny's Hammurabi Game!");
 
 
         System.out.println(" ██░ ██  ▄▄▄       ███▄ ▄███▓ ███▄ ▄███▓ █    ██  ██▀███   ▄▄▄       ▄▄▄▄    ██▓\n" +
