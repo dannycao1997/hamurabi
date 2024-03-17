@@ -1,5 +1,6 @@
 package hammurabi;               // package declaration
 import java.sql.SQLOutput;
+import java.util.InputMismatchException;
 import java.util.Random;         // imports go here
 import java.util.Scanner;
 
@@ -49,14 +50,14 @@ public class Hammurabi {
             int acresToPlant = askHowManyAcresToPlant(acresOwned, population, grainInStorage);
             grainInStorage -= acresToPlant * 2; // 2 buhles per acre to plant
 
-            // following year
 
+            // following year
             int plagueDeaths = plagueDeaths(population);
             population -= plagueDeaths;
 
             int starvationDeaths = starvationDeaths(population, grainToFeed);
             population -= starvationDeaths;
-            if(uprising(population, starvationDeaths)) {
+            if (uprising(population, starvationDeaths)) {
                 System.out.println("YOU'VE BEEN KICKED OUT OF OFFICE!");
                 break;
             }
@@ -64,49 +65,72 @@ public class Hammurabi {
             int immigrants = immigrants(population, acresOwned, grainInStorage);
             population += immigrants;
 
-            // rough draft update 
+            int harvestAmount = harvest(acresToPlant);
+            grainInStorage += harvestAmount;
 
+            int eatenByRats = grainEatenByRats(grainInStorage);
+            grainInStorage -= eatenByRats;
 
+            landValue = newCostOfLand();
 
+            if (year == 10) {
+                finalSummary();
+                break;
+            }
+        }
+    }
 
+    int askHowManyAcresToBuy(int price, int bushels) {
+        System.out.println("Land is currently worth " + price + " bushels per acre. ");
+        int acresToBuy = getNumber("How many acres will you buy? ");
+        while (acresToBuy * price > bushels) {
+            System.out.println("0 great Hammurabi, we have only " + bushels + " bushels of grain!");
+            acresToBuy = getNumber("How many acres will buy? ");
+        }
+        return acresToBuy;
+    }
 
+    int askHowManyAcresToSell(int acresOwned) {
+    }
 
+    int askHowMuchGrainToFeedPeople(int bushels) {
+    }
 
-        int askHowManyAcresToBuy(int price, int bushels){
+    int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
+    }
+
+    int plagueDeaths(int population) {
+    }
+
+    int starvationDeaths(int population, int bushelsFedToPeople) {
+    }
+
+    boolean uprising(int population, int howManyPeopleStarved) {
+    }
+
+    int immigrants(int population, int acresOwned, int grainInStorage) {
+    }
+
+    int harvest(int acres, int bushelsUsedAsSeed) {
+    }
+
+    int grainEatenByRats(int bushels) {
+    }
+
+    int newCostOfLand() {
+    }
+
+    int getNumber(String message) {
+        while (true) {
+            System.out.print(message);
+            try {
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("\"" + scanner.next() + "\" isn't a number!");
+            }
         }
 
-        int askHowManyAcresToSell(int acresOwned){
-        }
-
-        int askHowMuchGrainToFeedPeople(int bushels){
-        }
-
-        int askHowManyAcresToPlant(int acresOwned, int population, int bushels){
-        }
-
-        int plagueDeaths(int population){
-        }
-
-        int starvationDeaths(int population, int bushelsFedToPeople){
-        }
-
-        boolean uprising(int population, int howManyPeopleStarved){
-        }
-
-        int immigrants(int population, int acresOwned, int grainInStorage){
-        }
-
-        int harvest(int acres, int bushelsUsedAsSeed){
-        }
-
-        int grainEatenByRats(int bushels){
-        }
-
-        int newCostOfLand() {
-        }
-
-
-        void printSummary(int year){
+        void printSummary ( int year){
             System.out.println("0 great Hammurabi!");
             System.out.println("You are in year " + year + " of your ten year rule.");
             System.out.println("In the previous year " + year + " people starved to death.");
@@ -114,3 +138,4 @@ public class Hammurabi {
             System.out.println("Land is currenty worth " + landValue + " bushels per acre.");
         }
     }
+}
