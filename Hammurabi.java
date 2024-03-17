@@ -135,7 +135,7 @@ public class Hammurabi {
 
 
     void printSummary(int year){
-        System.out.println("0 Great Hammurabi!");
+        System.out.println("Hammurabi: I beg to report to you,");
         System.out.println("You are in year " + year + " of your ten year rule.");
         System.out.println("The population is now " + population + ".");
         System.out.println("Rats destroyed the bushels, leaving " + grainInStorage + " bushels in the storage.");
