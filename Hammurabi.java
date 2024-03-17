@@ -16,6 +16,7 @@ public class Hammurabi {
     }
 
     void playGame() {
+        System.out.println("Welcome to the Hammurabi Game!");
 
 
         System.out.println(" ██░ ██  ▄▄▄       ███▄ ▄███▓ ███▄ ▄███▓ █    ██  ██▀███   ▄▄▄       ▄▄▄▄    ██▓\n" +
@@ -54,7 +55,7 @@ public class Hammurabi {
             int starvationDeaths = starvationDeaths(population, grainToFeed);
             population -= starvationDeaths;
             if (uprising(population, starvationDeaths)) {
-                System.out.println("YOU'VE BEEN KICKED OUT OF OFFICE!");
+                System.out.println("TOO MANY PEOPLE STARVED, YOU'VE BEEN KICKED OUT OF OFFICE!");
                 break;
             }
 
@@ -119,7 +120,7 @@ public class Hammurabi {
         return acresToPlant;
     }
 
-    // get response
+    // loop to get response
     int getNumber(String message) {
         while (true) {
             System.out.print(message);
@@ -128,7 +129,7 @@ public class Hammurabi {
             }
             catch (InputMismatchException e) {
                 System.out.println("\"" + scanner.next() + "\" isn't a number!");
-            } // the loop will keep going and continue until a valid number is entered
+            }
         }
     }
 
@@ -137,9 +138,8 @@ public class Hammurabi {
         System.out.println("0 Great Hammurabi!");
         System.out.println("You are in year " + year + " of your ten year rule.");
         System.out.println("The population is now " + population + ".");
-        System.out.println("Rats destroyed bushels, leaving " + grainInStorage + " bushels in the storage.");
+        System.out.println("Rats destroyed the bushels, leaving " + grainInStorage + " bushels in the storage.");
         System.out.println("The city owns " + acresOwned + " acres of land.");
-        System.out.println("Land is currently worth " + landValue + " bushels per acre.");
     }
 
 
@@ -148,7 +148,7 @@ public class Hammurabi {
         System.out.println("Population: " + population);
         System.out.println("Acres owned: " + acresOwned);
         System.out.println("Bushels in storage: " + grainInStorage);
-        System.out.println("Land value: " + landValue + " bushels per acre");
+        System.out.println("Land value: " + landValue + " bushels per acre.");
     }
 
 
@@ -179,7 +179,7 @@ public class Hammurabi {
     }
 
     int grainEatenByRats(int grainInStorage) {
-        if (rand.nextInt(100) > 40) { // 40 % chance
+        if (rand.nextInt(100) < 40) { // 40 % chance
             int percent = rand.nextInt(21 ) + 10; // 10 - 30 % chance
             return grainInStorage * percent / 100;
         }
