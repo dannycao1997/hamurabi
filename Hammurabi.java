@@ -105,9 +105,57 @@ public class Hammurabi {
         }
         return grainToFeed;
     }
-
+    
     int askHowManyAcresToPlant(int acresOwned, int population, int bushels) {
+        int acresToPlant = getNumber("How many acres will you plant with seed? ");
+        while(acresToPlant > acresOwned || acresToPlant / 2 > bushels || acresToPlant > population * 10) {
+            if (acresToPlant > acresOwned) {
+                System.out.println("O great Hammurabi, we have only " + acresOwned + " acres of land!");
+            } else if (acresToPlant / 2 > bushels) {
+                System.out.println("O great Hammurabi, we have only " + bushels + " bushels of grain for planting!");
+            } else if (acresToPlant > population * 10); {
+                System.out.println("O great Hammurabi, we don't have enough people to plant that much land!");
+            }
+            acresToPlant = getNumber("How many acres will you plant with seed? ");
+        }
+        return acresToPlant;
     }
+
+
+    int getNumber(String message) {
+        while (true) {
+            System.out.print(message);
+            try {
+                return scanner.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("\"" + scanner.next() + "\" isn't a number!");
+            } // the loop will keep going and continue until a valid number is entered
+        }
+    }
+
+
+    void printSummary( int year){
+        System.out.println("0 great Hammurabi!");
+        System.out.println("You are in year " + year + " of your ten year rule.");
+        System.out.println("The population is now " + population + ".");
+        System.out.println("We harvested " + 'z' + " bushels at " + 'w' + " bushels per acre.");
+        // placeholder z for total and w for bushels per acre , need to come back and finish code
+        System.out.println("Rats destroyed " + 'r' + " bushels, leaving " + grainInStorage + " bushels in the stoarge.");
+        // placeholder r for grain eaten by rats, need to come back and finish code
+        System.out.println("The city owns " + acresOwned + " acres of land.");
+        System.out.println("Land is currently worth " + landValue + " bushels per acre.");
+    }
+
+
+    void finalSummary() {
+        System.out.println("You've completed your 10 year term!!!");
+        System.out.println("Population: " + population);
+        System.out.println("Acres owned: " + acresOwned);
+        System.out.println("Bushels in storage: " + grainInStorage);
+        System.out.println("Land value: " + landValue + " bushels per acre");
+    }
+
 
     int plagueDeaths(int population) {
     }
@@ -128,24 +176,5 @@ public class Hammurabi {
     }
 
     int newCostOfLand() {
-    }
-
-    int getNumber(String message) {
-        while (true) {
-            System.out.print(message);
-            try {
-                return scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("\"" + scanner.next() + "\" isn't a number!");
-            }
-        }
-
-        void printSummary( int year){
-            System.out.println("0 great Hammurabi!");
-            System.out.println("You are in year " + year + " of your ten year rule.");
-            System.out.println("In the previous year " + year + " people starved to death.");
-            System.out.println("The population is now " + population + ".");
-            System.out.println("Land is currenty worth " + landValue + " bushels per acre.");
-        }
     }
 }
